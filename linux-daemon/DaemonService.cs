@@ -16,13 +16,12 @@ namespace linux_daemon
         {
             _config = config;
             _logger = logger;
-            _timer = new Timer(TimerProc);
+            _timer = new Timer(TimerProc, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(30));
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Starting daemon: " + _config.Value.DaemonName);
-            _timer.Change(100, 1000);
             return Task.CompletedTask;
         }
 
@@ -39,7 +38,7 @@ namespace linux_daemon
 
         private void TimerProc(object state)
         {
-            _logger.LogInformation("Deamon running");
+            _logger.LogInformation("Daemon running");
         }
     }
 }
