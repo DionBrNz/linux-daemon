@@ -1,0 +1,9 @@
+﻿[Unit]
+Description = .Net core Linux Daemon
+After = network.target
+
+[Service]
+ExecStart = /usr/local/linux-daemon/linux-daemon
+
+[Install]
+WantedBy = multi-user.target
